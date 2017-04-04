@@ -95,7 +95,7 @@ class Environment(object):
         self.agent_states[agent] = {'location': random.choice(self.intersections.keys()), 'heading': (0, 1)}
         return agent
 
-    def set_primary_agent(self, agent, enforce_deadline=False):
+    def set_primary_agent(self, agent, enforce_deadline=True):
         """ When called, set_primary_agent sets 'agent' as the primary agent.
             The primary agent is the smartcab that is followed in the environment. """
 
