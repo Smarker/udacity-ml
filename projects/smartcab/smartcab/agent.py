@@ -106,7 +106,7 @@ class LearningAgent(Agent):
              if self.Q.get(state) == None:
                 self.Q[state] = {}
                 for action in self.valid_actions:
-                    self.Q[state][action] = 10
+                    self.Q[state][action] = 0
         return
 
 
