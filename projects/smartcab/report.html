@@ -13650,8 +13650,8 @@ KUmSJEmSJFXCxJQkSZIkSZIq8f8BIM/NscBfXXkAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The inputs feature and waypoint are two features most relevant for learning both safety and efficency. Inputs is important, because it contains information about the light and where cars are heading in relation to the smartcab. Without inputs, the smartcab would not have any way to tell whether or not it is choosing an action that is safe. Waypoint is important since it gives information about the direction the smartcab should be headed in order to maximize efficiency. Without waypoints, the car would not know of the optimal direction to travel.</p>
-<p>Inputs contains light which has 2 states (red, green), left which has 4 valid actions ['None', 'forward', 'left', right'], right which also has 4 valid actions, and oncoming which has 4 valid actions.</p>
+<p>The inputs feature and waypoint are two features most relevant for learning both safety and efficency. Inputs is important, because it contains information about the light and where cars are heading in relation to the smartcab. Without inputs, the smartcab would not have any way to tell whether or not it is choosing an action that is safe. I would not include the input - right feature since it would increase the state space by a factor of 4 and not really add much new information. Waypoint is important since it gives information about the direction the smartcab should be headed in order to maximize efficiency. Without waypoints, the car would not know of the optimal direction to travel.</p>
+<p>Inputs contains light which has 2 states (red, green), left which has 4 valid actions ['None', 'forward', 'left', right'], right which also has 4 valid actions, and oncoming which has 4 valid actions. Again, I would not include the right feature here, since it is redundant.</p>
 <p>Waypoints adds 3 more states since the smartcab could go forward, go right, or go left.</p>
 <p>Deadline was not chosen because it would increase the state space too much without adding too much information. Deadline could be any number between 0 and 5 times the distance the cab is away from the final destination.</p>
 
@@ -13687,7 +13687,7 @@ KUmSJEmSJFXCxJQkSZIkSZIq8f8BIM/NscBfXXkAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The size of the state space would be 2 x 4 x 4 x 4 x 3 = <strong>384</strong> states where 2 is for the lights, 4 is for the left feature, 4 is for the right feature, 4 is for the oncoming feature, and 3 is for the waypoints.</p>
+<p>The size of the state space would be 2 x 4 x 4 x 3 = <strong>96</strong> states where 2 is for the lights, 4 is for the left feature, 4 is for the oncoming feature, and 3 is for the waypoints.</p>
 <p>Given that the environment is 8 x 6 or 48 squares, num_dummies is 100, the traffic light switches periodically, and the cars choose random directions to travel, there should be enough randomness in the environment so that the driving agent could learn a policy for a state in a reasonable number of training trials. The smartcab should be able to encounter different states throughout the training process. There are not too many states so that the smartcab cannot learn from visiting the same state a few times and learn from its failures. There are not too few states so that the smartcab learns from states that are different from each other to provide more insight for the smartcab's learning.</p>
 
 </div>
@@ -18330,7 +18330,7 @@ rkJggg==
 <li>-- None : -4.54</li>
 <li>-- left : 1.52</li>
 </ul>
-<p>policy: go left, optimal policy: go left. Going left is the best action, since it is in the direction of the waypoint, the light is green, and no cars are incoming from the left direction.</p>
+<p>policy: go left, optimal policy: go left. Going left is the best action, since it is in the direction of the waypoint, the light is green, and no cars are incoming from the left direction. A suboptimal policy would be choosing None.</p>
 <p>('right', 'forward', 'green', 'left')</p>
 <ul>
 <li>-- forward : 1.01</li>
@@ -18338,7 +18338,7 @@ rkJggg==
 <li>-- None : 0.23</li>
 <li>-- left : 0.66</li>
 </ul>
-<p>policy: go right, optimal policy: go right/none. Going right is the best action, since it is in the direction of the waypoint, and the light is green. Since the state doesn't have any information about the car on the right, then this policy might not be an optimal policy.</p>
+<p>policy: go right, optimal policy: go right/none. Going right is the best action, since it is in the direction of the waypoint, and the light is green. The traffic on the right would have a red light, so the information about the right traffic irrelevant. None should be a suboptimal policy since the car should not do nothing at a green light.</p>
 <p>state: ('right', 'left', 'red', 'forward')</p>
 <ul>
 <li>-- forward : 0.00</li>
@@ -18346,7 +18346,16 @@ rkJggg==
 <li>-- None : 0.00</li>
 <li>-- left : -5.11</li>
 </ul>
-<p>policy: go right, optimal policy: go right. Going right is the best action, since it is in the direction of the waypoint, you can go right on red, and the car on the right is going right.</p>
+<p>policy: go right, optimal policy: go right. Going right is the best action, since it is in the direction of the waypoint, you can go right on red. Going left is a suboptimal policy.</p>
+<p><strong>Example of a suboptimal policy:</strong>
+state ('left', None, 'green', 'right')</p>
+<ul>
+<li>-- forward : 0.00</li>
+<li>-- right : 0.78</li>
+<li>-- None : -3.87</li>
+<li>-- left : -15.10</li>
+</ul>
+<p>The set of all suboptimal pairs is a suboptimal policy: (None, -3.87), (left, -15.10)</p>
 
 </div>
 </div>
@@ -18378,8 +18387,8 @@ rkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The smartcab has a waypoint feature which already provides the optimal direction for the cab to head in order to reach the goal and be more efficient. There is no need for the gamma discount factor to make the cab more efficient, since there is a feature that already exists to make the cab more efficient (waypoint).</p>
-<p>The environment already contains an act method that discounts the reward over time with respect to deadline. Since the environment already contains a function that does that gamma would do, that is, discounting the reward over time, gamma is not needed.</p>
+<p>The smartcab only gets "local" information like the status of the intersection it's in. This local information contributes to the state and corresponding reward values put into the Q-table. The smartcab is following the optimal policy in the Q-table. That is the cab will choose actions that maximize the rewards for a given state. No future rewards are needed, because the car will choose an action by only looking at its local state and won't need to consider the long term future rewards as choosing a direction that is not optimal most likely will result in a traffic violation with a large negative reward.</p>
+<p>The environment randomly chooses a start position for the cab and a destination at each trial. Since the start and end positions change at each trial, it would take way too long to train the car to optimize the route for a given start and end position.  The size of the grid is so large that there's not a good chance that the randomly chosen start and end destination would be repeated in a later trial. Even with future rewards, the discounted reward over time would not speed up the process of learning, since the chances a initial configuration would be repeated are low.</p>
 
 </div>
 </div>
