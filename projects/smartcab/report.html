@@ -13651,9 +13651,9 @@ KUmSJEmSJFXCxJQkSZIkSZIq8f8BIM/NscBfXXkAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>The inputs feature and waypoint are two features most relevant for learning both safety and efficency. Inputs is important, because it contains information about the light and where cars are heading in relation to the smartcab. Without inputs, the smartcab would not have any way to tell whether or not it is choosing an action that is safe. I would not include the input - right feature since it would increase the state space by a factor of 4 and not really add much new information. Waypoint is important since it gives information about the direction the smartcab should be headed in order to maximize efficiency. Without waypoints, the car would not know of the optimal direction to travel.</p>
-<p>Inputs contains light which has 2 states (red, green), left which has 4 valid actions ['None', 'forward', 'left', right'], right which also has 4 valid actions, and oncoming which has 4 valid actions. Again, I would not include the right feature here, since it is redundant.</p>
+<p>Inputs contains light which has 2 states (red, green), left which has 4 valid actions ['None', 'forward', 'left', right'], right which also has 4 valid actions, and oncoming which has 4 valid actions. Again, I would not include the right feature here, since this is not needed based on US traffic laws.</p>
 <p>Waypoints adds 3 more states since the smartcab could go forward, go right, or go left.</p>
-<p>Deadline was not chosen because it would increase the state space too much without adding too much information. Deadline could be any number between 0 and 5 times the distance the cab is away from the final destination.</p>
+<p>Deadline was not chosen because it would increase the state space too much without adding too much information and make the algorithm suffer from the curse of dimansionality. Deadline also could possibly influence the agent in making illegal moves when the deadline is nearby the smartcab.</p>
 
 </div>
 </div>
@@ -13689,6 +13689,7 @@ KUmSJEmSJFXCxJQkSZIkSZIq8f8BIM/NscBfXXkAAAAASUVORK5CYII=
 <p><strong>Answer:</strong></p>
 <p>The size of the state space would be 2 x 4 x 4 x 3 = <strong>96</strong> states where 2 is for the lights, 4 is for the left feature, 4 is for the oncoming feature, and 3 is for the waypoints.</p>
 <p>Given that the environment is 8 x 6 or 48 squares, num_dummies is 100, the traffic light switches periodically, and the cars choose random directions to travel, there should be enough randomness in the environment so that the driving agent could learn a policy for a state in a reasonable number of training trials. The smartcab should be able to encounter different states throughout the training process. There are not too many states so that the smartcab cannot learn from visiting the same state a few times and learn from its failures. There are not too few states so that the smartcab learns from states that are different from each other to provide more insight for the smartcab's learning.</p>
+<p>Also, the number of other cars on the road would effect the states. If there are more cars on the road, there will be a greater chance that the smartcab will encounter instances with left and oncoming traffic. This may make it more difficult for the smartcab to encounter other states where there's no traffic.</p>
 
 </div>
 </div>
@@ -18284,7 +18285,7 @@ rkJggg==
 <p>I used an exponential decay function, e^-at, for epsilon with a = 0.01 and t for number of trials. I chose a small value for the constant a, to increase the number of trials by slowing down the decay of epsilon. That way, the smartcab would have more trials for learning with a higher value of epsilon.</p>
 <p>Approximately 462 training trials were needed for my agent before beginning testing.</p>
 <p>The epsilon tolerance I used was 0.01 and alpha (learning rate) was 0.5. I chose a low tolerance to have more training trials for my smartcab. I chose 0.5 so that the smartcab will still learn since its value is above 0, and will not only consider the most recent information since its value is below 1.</p>
-<p>There was a lot of improvement for this Q-learner when compared to the default Q-learner for both safety and reliability.</p>
+<p>There was a lot of improvement for this Q-learner when compared to the default Q-learner for both safety and reliability. In the '10-Trial Rolling Rate of Reliability Graph' for the default Q-learner, the reliability was between 0 and 40% for all trials. However, in the optimized Q-learner, the reliability rate from trials 0 to 100 there was a steady increase in the reliability and from 100 to 400+ the reliability ranged from 80-100%. Also, looking at the '10-Trial Rolling Relative Frequency of Bad Actions' graph for the default Q-learner, the frequency of bad actions happened at a consistent rate. There was no decrease in the number of bad actions. On the other hand, the optimized Q-learner showed an exponential decrease in the number of bad actions across trials.</p>
 <p>I would say that the A+ ratings for safety and reliability results show that my driving agent successfully learned an appropriate policy.</p>
 <p>I am satisfied with the A+ ratings for safety and reliability.</p>
 
@@ -18347,15 +18348,15 @@ rkJggg==
 <li>-- left : -5.11</li>
 </ul>
 <p>policy: go right, optimal policy: go right. Going right is the best action, since it is in the direction of the waypoint, you can go right on red. Going left is a suboptimal policy.</p>
-<p><strong>Example of a suboptimal policy:</strong>
-state ('left', None, 'green', 'right')</p>
+<p><strong>Example of a suboptimal policy:</strong></p>
+<p>state ('left', None, 'green', 'right')</p>
 <ul>
 <li>-- forward : 0.00</li>
 <li>-- right : 0.78</li>
 <li>-- None : -3.87</li>
 <li>-- left : -15.10</li>
 </ul>
-<p>The set of all suboptimal pairs is a suboptimal policy: (None, -3.87), (left, -15.10)</p>
+<p>This could be considered a sub-optimal state, since forward could be the best action. The highest reward is the action to go right, even though this would mean that the car would be traveling further from its destination. The high negative reward for left makes sense since the smartcab must yield to oncoming traffic turning to the right.</p>
 
 </div>
 </div>
