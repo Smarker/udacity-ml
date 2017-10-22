@@ -1,0 +1,23 @@
+query GoEthereumCommitHistory {
+  repository(name: "go-ethereum", owner: "ethereum") {
+    ref(qualifiedName: "master") {
+      target {
+        ... on Commit {
+          id
+          history(first: 5) {
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              node {
+                author {
+                  date
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
