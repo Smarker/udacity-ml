@@ -1,0 +1,53 @@
+{
+  "data": {
+    "repository": {
+      "ref": {
+        "target": {
+          "id": "MDY6Q29tbWl0MTU0NTI5MTk6NDc5YWE2MWYxMTcyNDU2MGM2M2E3YjU2MDg0MjU5NTUyODkyODE5ZA==",
+          "history": {
+            "pageInfo": {
+              "hasNextPage": true
+            },
+            "edges": [
+              {
+                "node": {
+                  "author": {
+                    "date": "2017-10-20T15:21:54.000+03:00"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "author": {
+                    "date": "2017-10-20T14:31:29.000+03:00"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "author": {
+                    "date": "2017-10-20T14:01:38.000+03:00"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "author": {
+                    "date": "2017-10-20T12:34:43.000+03:00"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "author": {
+                    "date": "2017-10-20T13:25:19.000+03:00"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
