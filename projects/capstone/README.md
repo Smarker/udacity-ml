@@ -1,6 +1,7 @@
 # Machine Learning Engineer Nanodegree
 ## Predicting the Value of Ether over Time
 Stephanie Marker
+
 November 10, 2017
 
 ## I. Definition
@@ -9,27 +10,27 @@ November 10, 2017
 
 ### Domain Background
 
-Ethereum is a decentralized digital cryptocurrency platform invented by Vitalik Buterin in 2013. It uses public key cryptography and a consensus algorithm called "proof of work" (POW) to prevent denial of service attacks on the system. [1](https://github.com/ethereum/wiki/wiki/White-Paper) Ether, Ethereum’s currency, does not go through a bank, rather, Ether are managed in peer to peer transactions. Therefore Ether transactions are much cheaper.
-Transactions are tracked on the blockchain, a distributed ledger. As Figure 1 indicates, every block in the chain contains a pointer from the previous block, a timestamp, a nonce, and a copy of valid transaction records within that block.
+Ethereum is a decentralized digital cryptocurrency platform invented by Vitalik Buterin in 2013. It uses public key cryptography and a consensus algorithm called "proof of work" (POW) to prevent denial of service attacks on the system. [[1](https://github.com/ethereum/wiki/wiki/White-Paper)] Ether, Ethereum’s currency, does not go through a bank, rather, Ether are managed in peer to peer transactions. Therefore Ether transactions are much cheaper.
+Transactions are tracked on the blockchain, a distributed ledger. As **Figure 1** indicates, every block in the chain contains a pointer from the previous block, a timestamp, a nonce, and a copy of valid transaction records within that block.
 
 ![blockchain components](https://cdn-images-1.medium.com/max/1600/1*W-8mmfDDP5jrPMtsJSa0Rw.png)
 
-**Figure 1** [2](https://en.wikipedia.org/wiki/Blockchain)
-When a person wants to send Ether to another user, that person will request to have their transaction be validated by the miners and added to the chain.[2](https://spectrum.ieee.org/computing/networks/the-future-of-the-web-looks-a-lot-like-bitcoin) Each miner maintains their own copy of the blockchain, so that they can verify each other's work. Miners race to validate these requests. The miner with the longest chain and a majority approval from the other miners working on their own copies of the chain receives a monetary reward in Ether for the transactions that the miner verified. Only when the miners are in agreement, does the transaction get added to the latest block in their copy of the chain.  
-Because blockchain is peer to peer and relies on proof of work, it deters people from attempting to alter the history of transactions. This is because a crook would have to fool the other miners that their copy of the chain with an altered beginning transaction is valid. Remember, the miner who has the longest verified chain has their chain accepted as the source of truth for all the other miners. Therefore, a crook would have to do expensive calculations from the early block to the current block faster than all the other miners compute the current block as shown in Figure 2.
+**Figure 1** [[2](https://en.wikipedia.org/wiki/Blockchain)]
+When a person wants to send Ether to another user, that person will request to have their transaction be validated by the miners and added to the chain.[[2](https://spectrum.ieee.org/computing/networks/the-future-of-the-web-looks-a-lot-like-bitcoin)] Each miner maintains their own copy of the blockchain, so that they can verify each other's work. Miners race to validate these requests. The miner with the longest chain and a majority approval from the other miners working on their own copies of the chain receives a monetary reward in Ether for the transactions that the miner verified. Only when the miners are in agreement, does the transaction get added to the latest block in their copy of the chain.  
+Because blockchain is peer to peer and relies on proof of work, it deters people from attempting to alter the history of transactions. This is because a crook would have to fool the other miners that their copy of the chain with an altered beginning transaction is valid. Remember, the miner who has the longest verified chain has their chain accepted as the source of truth for all the other miners. Therefore, a crook would have to do expensive calculations from the early block to the current block faster than all the other miners compute the current block as shown in **Figure 2**.
 
 ![blockchain security](https://spectrum.ieee.org/img/07OLBitcoinf2-1435160570777.png)
 
-**Figure 2** [3](https://spectrum.ieee.org/img/07OLBitcoinf2-1435160570777.png) 
-The more people that use Ether, the more valuable it is, as increased use validates its acceptance in the community. You can see this effect in Figure 3, as the number of transactions of Ether have increased over time, with the largest number of transactions, 546,837, occurring on Friday, October 20, 2017. This increased transaction count is correlated to the price of Ether as evident when comparing the price of Ether in Figure 4 with its transaction count in Figure 3.
+**Figure 2** [[3](https://spectrum.ieee.org/img/07OLBitcoinf2-1435160570777.png)]
+The more people that use Ether, the more valuable it is, as increased use validates its acceptance in the community. You can see this effect in **Figure 3**, as the number of transactions of Ether have increased over time, with the largest number of transactions, 546,837, occurring on Friday, October 20, 2017. This increased transaction count is correlated to the price of Ether as evident when comparing the price of Ether in **Figure 4** with its transaction count in **Figure 3**.
 
 [add pic here]
 
-Figure 3 [4](https://etherscan.io/chart/tx)
+**Figure 3** [[4](https://etherscan.io/chart/tx)]
 
 [add pic here]
 
-Figure 4 [5](https://cointelegraph.com/ethereum-price-index)
+**Figure 4** [[5](https://cointelegraph.com/ethereum-price-index)]
 I want to analyze the price of Ether over time because it is gaining popularity and I personally believe in this product.
 
 ### Problem Statement
@@ -79,7 +80,7 @@ In this section, you will need to discuss the algorithms and techniques you inte
 - _Is it made clear how the input data or datasets will be handled by the algorithms and techniques chosen?_
 
 ### Benchmark
-A team of MIT students used bayesian regression to predict every two seconds, the average price change of Bitcoin over the next 10 seconds. The team was successful and “over 50 days, the team’s 2,872 trades gave them an 89 percent return on investment.” [12](http://news.mit.edu/2014/mit-computer-scientists-can-predict-price-bitcoin) They wrote a paper on their Bayesian regression method and how effectively they predicted the price of Bitcoin, a cryptocurrency. [13](https://dspace.mit.edu/handle/1721.1/101044)
+A team of MIT students used bayesian regression to predict every two seconds, the average price change of Bitcoin over the next 10 seconds. The team was successful and “over 50 days, the team’s 2,872 trades gave them an 89 percent return on investment.” [[12](http://news.mit.edu/2014/mit-computer-scientists-can-predict-price-bitcoin)] They wrote a paper on their Bayesian regression method and how effectively they predicted the price of Bitcoin, a cryptocurrency. [[13](https://dspace.mit.edu/handle/1721.1/101044)]
 
 ## III. Methodology
 _(approx. 3-5 pages)_
